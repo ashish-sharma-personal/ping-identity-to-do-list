@@ -38,8 +38,6 @@ const onClearAll = async () => {
 }
 
 const sortedTodos = computed(() => todoStore.sortedTodos())
-
-console.log('sortedTodos', sortedTodos.value)
 </script>
 
 <template>

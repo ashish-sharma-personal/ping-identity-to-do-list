@@ -113,7 +113,6 @@ export const useTodoStore = defineStore('todos', {
         id = Number(id)
       }
       const todo = state.todos.find((todo) => {
-        console.log('todo', typeof todo.id, typeof id, todo.id === id)
         return todo.id === id
       })
       if (!todo) {
