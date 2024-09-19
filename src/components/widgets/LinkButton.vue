@@ -1,7 +1,7 @@
 <script setup>
 import { defineProps } from 'vue'
 
-defineProps(['label', 'to'])
+defineProps(['to'])
 </script>
 
 <template>
@@ -11,13 +11,10 @@ defineProps(['label', 'to'])
 <style scoped>
 .router-link {
   padding: 8px 12px;
-  margin: 10px;
   background-color: #1890ff;
   color: white;
   border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
+  height: 36px;
 }
 
 .router-link:hover {

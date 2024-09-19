@@ -10,7 +10,7 @@ export const useTodoStore = defineStore('todos', {
   }),
 
   actions: {
-    setSortingOrder() {
+    toggleSortingOrder() {
       this.isAscending = !this.isAscending
     },
 
@@ -49,19 +49,20 @@ export const useTodoStore = defineStore('todos', {
       if (!id) {
         throw new Error('This todo is missing an id. Try refreshing the page and deleting again.')
       }
-      const newTodos = this.todos.filter((todo) => todo.id !== id)
-      if (newTodos.length === this.todos.length) {
+      const todos = this.todos.filter((todo) => todo.id !== id)
+      if (todos.length === this.todos.length) {
         throw new Error('Todo not found. Do you wish to add a new Todo instead?')
       }
-      this.todos = newTodos
+      this.todos = todos
       await this.saveToPersistentStorage()
-      return this.todos
+      return { todos, message: 'Todo deleted successfully!' }
     },
 
-    async clearTodos() {
-      this.todos = []
+    async clearAll() {
+      const todos = []
+      this.todos = todos
       await this.saveToPersistentStorage()
-      return this.todos
+      return { todos, message: 'All todos deleted successfully!' }
     },
 
     async editTodo(id, description, priority) {

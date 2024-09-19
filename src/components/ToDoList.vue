@@ -15,9 +15,22 @@ const onDelete = async (todoId) => {
   notificationMessage.value = ''
   notificationType.value = ''
   try {
-    await todoStore.deleteTodo(todoId)
+    const { message } = await todoStore.deleteTodo(todoId)
     notificationType.value = NotificationType.success
-    notificationMessage.value = 'Todo deleted successfully!'
+    notificationMessage.value = message
+  } catch (caughtError) {
+    notificationType.value = NotificationType.error
+    notificationMessage.value = caughtError
+  }
+}
+
+const onClearAll = async () => {
+  notificationMessage.value = ''
+  notificationType.value = ''
+  try {
+    const { message } = await todoStore.clearAll()
+    notificationType.value = NotificationType.success
+    notificationMessage.value = message
   } catch (caughtError) {
     notificationType.value = NotificationType.error
     notificationMessage.value = caughtError
@@ -26,7 +39,7 @@ const onDelete = async (todoId) => {
 
 const sortedTodos = computed(() => todoStore.sortedTodos())
 
-const toggleSortOrder = todoStore.setSortingOrder
+console.log('sortedTodos', sortedTodos.value)
 </script>
 
 <template>
@@ -34,28 +47,43 @@ const toggleSortOrder = todoStore.setSortingOrder
 
   <NotificationBanner :message="notificationMessage" :type="notificationType" />
 
-  <div class="actions">
-    <CommonButton
-      :is-disabled="!sortedTodos.length"
-      label="Toggle Sort Order"
-      :onclick="toggleSortOrder"
-    />
+  <div class="action-bar">
+    <div class="actions">
+      <CommonButton
+        data-testid="toggle-sort-order"
+        :is-disabled="!sortedTodos.length"
+        label="Toggle Sort Order"
+        @click="todoStore.toggleSortingOrder"
+      />
+      <CommonButton
+        data-testid="clear-all"
+        :is-disabled="!sortedTodos.length"
+        label="Clear All Todos"
+        @click="onClearAll"
+      />
+    </div>
 
-    <LinkButton to="/to-do/new">Add New Todo</LinkButton>
+    <LinkButton data-testid="add-new-todo" to="/to-do/new">Add New Todo</LinkButton>
   </div>
 
-  <ToDoListItem v-for="todo in sortedTodos" :key="todo.id" :todo="todo" :onDelete="onDelete" />
+  <ToDoListItem v-for="todo in sortedTodos" :key="todo.id" :todo="todo" @delete="onDelete" />
 </template>
 
 <style scoped>
 .section-heading {
   text-align: center;
-  font-size: 24px;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 24px 0;
 }
 
 .actions {
   display: flex;
-  justify-content: space-between;
-  margin: 24px 0;
+  gap: 16px;
+  align-items: center;
 }
 </style>

@@ -52,15 +52,19 @@ const onSubmit = async () => {
 </script>
 
 <template>
-  <h2>{{ isNewTodo ? 'Add New Todo' : 'Edit Todo' }}</h2>
+  <NotificationBanner
+    class="notification-bar"
+    :message="notificationMessage"
+    :type="notificationType"
+  />
 
-  <NotificationBanner :message="notificationMessage" :type="notificationType" />
+  <h2 class="section-heading">{{ isNewTodo ? 'Add New Todo' : 'Edit Todo' }}</h2>
 
   <form @submit.prevent="onSubmit" class="todo-form">
     <div class="form-group">
       <label for="description">Description</label>
       <input
-        id="description"
+        autocomplete="off"
         type="text"
         v-model="todo.description"
         placeholder="Enter todo description"
@@ -84,15 +88,18 @@ const onSubmit = async () => {
 </template>
 
 <style scoped>
-h2 {
+.notification-bar {
+  margin: 20px 0;
+}
+.section-heading {
   text-align: center;
-  font-size: 24px;
   margin-bottom: 20px;
 }
 
 .todo-form {
   display: flex;
   flex-direction: column;
+  padding: 0 72px;
 }
 
 .form-group {

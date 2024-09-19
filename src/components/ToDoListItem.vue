@@ -4,8 +4,10 @@ import { defineProps } from 'vue'
 import CommonButton, { ButtonStyle } from './widgets/CommonButton.vue'
 import LinkButton from './widgets/LinkButton.vue'
 
-const props = defineProps(['todo', 'onDelete'])
-const { todo, onDelete } = props
+const props = defineProps(['todo'])
+const emit = defineEmits(['delete'])
+
+const { todo } = props
 </script>
 <template>
   <div class="todo-list-item">
@@ -19,11 +21,7 @@ const { todo, onDelete } = props
       </p>
 
       <div class="actions">
-        <CommonButton
-          label="Delete"
-          :style="ButtonStyle.danger"
-          :onClick="() => onDelete(todo.id)"
-        />
+        <CommonButton label="Delete" :style="ButtonStyle.danger" @click="emit('delete', todo.id)" />
 
         <LinkButton :to="{ name: 'to-do', params: { id: todo.id } }">Edit</LinkButton>
       </div>

@@ -7,13 +7,15 @@ export const ButtonStyle = {
 <script setup>
 import { computed, defineProps } from 'vue'
 
-const props = defineProps(['label', 'style', 'isDisabled', 'onClick'])
+const props = defineProps(['label', 'style', 'isDisabled'])
+
+const emit = defineEmits(['click'])
 
 const buttonStyle = computed(() => props.style || ButtonStyle.basic)
 </script>
 
 <template>
-  <button :disabled="props.isDisabled" :class="buttonStyle" @click="props.onClick">
+  <button :disabled="props.isDisabled" :class="buttonStyle" @click="emit('click')">
     {{ label }}
   </button>
 </template>
@@ -24,6 +26,8 @@ button {
   color: white;
   border: none;
   border-radius: 4px;
+  height: 36px;
+  cursor: pointer;
 }
 
 button:disabled {
@@ -35,7 +39,7 @@ button:disabled {
   background-color: #4caf50;
 }
 
-.basic:hover {
+.basic:not(:disabled):hover {
   background-color: #45a049;
 }
 
