@@ -22,7 +22,7 @@ describe('Todos Store', () => {
     window.localStorage = getMockedLocalStorage()
   })
 
-  it('toggles sorting order', () => {
+  it('toggleSortingOrder > toggles sorting order', () => {
     store.toggleSortingOrder()
     expect(store.isAscending).toBe(true)
   })
@@ -90,7 +90,7 @@ describe('Todos Store', () => {
     ).rejects.toThrow('Todo not found. Do you wish to add a new Todo instead?')
   })
 
-  it('getTodoById > should return a todo for id passed', () => {
+  it('getTodoById > should return a todo for the id passed', () => {
     const id = Date.now()
     const todo = { id, description: 'Some text', priority: ascendingPriorities[0] }
     store.todos.push(todo)

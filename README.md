@@ -1,15 +1,5 @@
 # ping-identity-to-do-list
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
 ## Project Setup
 
 ```sh
@@ -22,11 +12,18 @@ npm install
 npm run dev
 ```
 
-### Compile and Minify for Production
+### Notes from Ashish
 
-```sh
-npm run build
-```
+---
+
+1. PTAL at the ./test-suite.xlsx file. It should give an idea of how I approach writing tests:
+   i) Prepare a list of all the possible test cases
+   ii) Identify testing strategy against each test from below options in the descending order of priority:
+   Unit Tests > Integration Tests > E2Es
+   Thereby minimizing the need for more E2Es
+2. I could not pen down all the possible test cases because of time contraints, but tried writing a few cypress e2e tests, the store relates UTs and one component's UTs to show-case my skills
+
+---
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
@@ -38,20 +35,4 @@ npm run test:unit
 
 ```sh
 npm run test:e2e:dev
-```
-
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
-
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```

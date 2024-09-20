@@ -17,7 +17,10 @@ export const mockedTodos = [
   { id: 1, description: 'Some text for Todo 2', priority: ascendingPriorities[1] }
 ]
 
+let store
+
 export const mockTodosStore = () => {
   setActivePinia(createPinia())
-  return useTodoStore()
+  store = store ? store : useTodoStore()
+  return store
 }

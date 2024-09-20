@@ -69,13 +69,14 @@ const onSubmit = async () => {
         v-model="todo.description"
         placeholder="Enter todo description"
         required
+        data-testid="todo-description-input"
       />
     </div>
 
     <div class="form-group">
       <label for="priority">Priority <component :is="priorityConfig[todo.priority]?.icon" /></label>
 
-      <select v-model="todo.priority" required>
+      <select v-model="todo.priority" required data-testid="todo-priority-select">
         <option value="" disabled>Select priority</option>
         <option v-for="priority in descendingPriorities" :key="priority" :value="priority">
           {{ priorityConfig[priority].label }}
@@ -83,7 +84,11 @@ const onSubmit = async () => {
       </select>
     </div>
 
-    <CommonButton :is-disabled="!isFormValid" :label="isNewTodo ? 'Add Todo' : 'Update Todo'" />
+    <CommonButton
+      data-testid="todo-submit-button"
+      :is-disabled="!isFormValid"
+      :label="isNewTodo ? 'Add Todo' : 'Update Todo'"
+    />
   </form>
 </template>
 

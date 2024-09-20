@@ -6,7 +6,9 @@ import ToDoForm from '../components/ToDoForm.vue'
 <template>
   <main class="page-wrapper">
     <nav>
-      <LinkButton :to="{ name: 'to-do-list' }"> <IconGoBack /> Go back to To Do list </LinkButton>
+      <LinkButton data-testid="go-to-list-page" :to="{ name: 'to-do-list' }">
+        <IconGoBack /> Go back to To Do list
+      </LinkButton>
     </nav>
 
     <ToDoForm />
